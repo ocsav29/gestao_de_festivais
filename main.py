@@ -39,9 +39,21 @@ def criar_evento():
             data = data_validada.strftime("%d/%m/%Y")
             break
         except ValueError:
-            print("Data inválida. Usa DD/MM/AAAA com uma data real.")
+            print("Data inválida. Usa DD/MM/AAAA com uma data real.")1
     capacidade = int(input("Capacidade máxima: "))
-    orcamento = float(input("Orçamento (€): ").replace(",", "."))
+    while True:
+        try:
+            orcamento = float(
+                input("Orçamento (€): ").replace(",", ".")
+            )
+
+            if 0 <= orcamento < float("inf"):
+                break
+
+            print("Introduz um orçamento válido igual ou superior a zero.")
+
+        except ValueError:
+            print("Escreve um número. Exemplo: 1500 ou 1500,50.")
 
     evento = {
         "id": len(eventos) + 1,
