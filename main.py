@@ -1,13 +1,45 @@
+from datetime import datetime
+
+
+
 eventos = []
 
 
 def criar_evento():
     print("\n=== CRIAR EVENTO ===")
 
-    nome = input("Nome: ")
-    descricao = input("Descrição: ")
-    local = input("Local: ")
-    data = input("Data (DD/MM/AAAA): ")
+    while True:
+        nome = input("Nome: ").strip()
+
+        if nome:
+            break
+
+        print("O nome não pode ficar vazio.")
+
+    while True:
+        descricao = input("Descrição: ").strip()
+
+        if descricao:
+            break
+
+        print("A descrição não pode ficar vazia.")
+
+    while True:
+        local = input("Local: ").strip()
+
+        if local:
+            break
+
+        print("O local não pode ficar vazio.")
+    while True:
+        data = input("Data (DD/MM/AAAA): ").strip()
+
+        try:
+            data_validada = datetime.strptime(data, "%d/%m/%Y")
+            data = data_validada.strftime("%d/%m/%Y")
+            break
+        except ValueError:
+            print("Data inválida. Usa DD/MM/AAAA com uma data real.")
     capacidade = int(input("Capacidade máxima: "))
     orcamento = float(input("Orçamento (€): ").replace(",", "."))
 
