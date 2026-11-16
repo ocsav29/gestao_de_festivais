@@ -1,3 +1,33 @@
+eventos = []
+
+
+def criar_evento():
+    print("\n=== CRIAR EVENTO ===")
+
+    nome = input("Nome: ")
+    descricao = input("Descrição: ")
+    local = input("Local: ")
+    data = input("Data (DD/MM/AAAA): ")
+    capacidade = int(input("Capacidade máxima: "))
+    orcamento = float(input("Orçamento (€): ").replace(",", "."))
+
+    evento = {
+        "id": len(eventos) + 1,
+        "nome": nome,
+        "descricao": descricao,
+        "local": local,
+        "data": data,
+        "capacidade": capacidade,
+        "orcamento": orcamento
+    }
+
+    eventos.append(evento)
+
+    print(f"\nEvento '{nome}' criado com sucesso!")
+
+
+
+
 def menu():
     while True:
         print("\n=== GESTÃO DE FESTIVAIS ===")
@@ -10,7 +40,7 @@ def menu():
         opcao = input("Escolhe uma opção: ")
 
         if opcao == "1":
-            print("Vamos implementar a criação de eventos.")
+            criar_evento()
 
         elif opcao == "2":
             print("Vamos implementar a consulta de eventos.")
