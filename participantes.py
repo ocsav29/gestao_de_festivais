@@ -5,7 +5,7 @@ Os participantes ficam guardados dentro de cada evento,
 na lista evento["participantes"]. Cada participante tem:
 id, nome e contacto.
 """
-
+from uuid import uuid4
 
 def escolher_evento(eventos):
     """
@@ -67,6 +67,43 @@ def lugares_disponiveis(evento):
     """
     return evento["capacidade"] - contar_participantes(evento)
 
+def pedir_texto_obrigatorio(pergunta):
+    """
+    Pede um texto ao utilizador e repete até não estar vazio.
+
+    Parâmetros:
+        pergunta (str): texto mostrado ao utilizador (ex.: "Nome: ").
+
+    Devolve:
+        str: o texto escrito, sem espaços no início e no fim.
+    """
+    while True:
+        texto = input(pergunta).strip()
+
+        if texto:
+            return texto
+
+        print("Este campo não pode ficar vazio.")
+
+
+def pedir_dados_participante():
+    """
+    Pede o nome e o contacto de um participante e cria o seu dicionário.
+
+    Devolve:
+        dict: participante com as chaves id, nome e contacto.
+    """
+    nome = pedir_texto_obrigatorio("Nome do participante: ")
+    contacto = pedir_texto_obrigatorio("Contacto (telefone ou email): ")
+
+    participante = {
+        "id": uuid4().hex,  # código único, como nos eventos
+        "nome": nome,
+        "contacto": contacto,
+    }
+
+    return participante
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python participantes.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -102,3 +139,6 @@ if __name__ == "__main__":
     ]
     print("Inscritos:", contar_participantes(eventos_teste[0]))
     print("Vagas:", lugares_disponiveis(eventos_teste[0]))
+
+    novo = pedir_dados_participante()
+    print("Participante criado:", novo)
