@@ -6,6 +6,7 @@ eventos = []
 
 
 def criar_evento():
+    """Valida os dados introduzidos e adiciona um evento à lista."""
     print("\n=== CRIAR EVENTO ===")
 
     while True:
@@ -39,8 +40,18 @@ def criar_evento():
             data = data_validada.strftime("%d/%m/%Y")
             break
         except ValueError:
-            print("Data inválida. Usa DD/MM/AAAA com uma data real.")1
-    capacidade = int(input("Capacidade máxima: "))
+            print("Data inválida. Usa DD/MM/AAAA com uma data real.")
+    while True:
+        try:
+            capacidade = int(input("Capacidade máxima: "))
+
+            if capacidade > 0:
+                break
+
+            print("A capacidade tem de ser maior que zero.")
+
+        except ValueError:
+            print("Escreve um número inteiro. Exemplo: 500.")
     while True:
         try:
             orcamento = float(
