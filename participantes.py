@@ -41,6 +41,31 @@ def escolher_evento(eventos):
     # A lista começa na posição 0, por isso subtrai-se 1
     return eventos[escolha - 1]
 
+def contar_participantes(evento):
+    """
+    Conta quantos participantes estão inscritos num evento.
+
+    Parâmetros:
+        evento (dict): o evento a verificar.
+
+    Devolve:
+        int: número de participantes inscritos (0 se ainda não houver).
+    """
+    # .get devolve uma lista vazia se o evento ainda não tiver participantes
+    return len(evento.get("participantes", []))
+
+
+def lugares_disponiveis(evento):
+    """
+    Calcula quantos lugares ainda estão livres num evento.
+
+    Parâmetros:
+        evento (dict): o evento a verificar.
+
+    Devolve:
+        int: capacidade do evento menos os participantes já inscritos.
+    """
+    return evento["capacidade"] - contar_participantes(evento)
 
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python participantes.py). Serve apenas para testes.
@@ -66,5 +91,14 @@ if __name__ == "__main__":
         },
     ]
 
-    evento = escolher_evento(eventos_teste)
-    print("Escolhido:", evento)
+        # Evento sem participantes
+    print("Inscritos:", contar_participantes(eventos_teste[0]))
+    print("Vagas:", lugares_disponiveis(eventos_teste[0]))
+
+    # Simula 2 participantes inscritos
+    eventos_teste[0]["participantes"] = [
+        {"id": "p1", "nome": "Ana", "contacto": "912345678"},
+        {"id": "p2", "nome": "Rui", "contacto": "rui@email.pt"},
+    ]
+    print("Inscritos:", contar_participantes(eventos_teste[0]))
+    print("Vagas:", lugares_disponiveis(eventos_teste[0]))
