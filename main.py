@@ -1,6 +1,6 @@
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
-
+from consultar_eventos import consultar_eventos
 
 eventos = carregar_eventos()
 
@@ -19,8 +19,7 @@ def menu():
             criar_evento(eventos)
             guardar_eventos(eventos)
         elif opcao == "2":
-            print("Vamos implementar a consulta de eventos.")
-
+            consultar_eventos(eventos)
         elif opcao == "3":
             print("Vamos implementar a edição de eventos.")
 
