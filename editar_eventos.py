@@ -5,7 +5,7 @@ Permite alterar os dados de um evento que já existe.
 Cada evento é um dicionário com as chaves:
 id, nome, descricao, local, data, capacidade e orcamento.
 """
-
+from datetime import datetime
 
 def procurar_evento_por_id(eventos, id_evento):
     """
@@ -50,6 +50,33 @@ def pedir_texto(campo, valor_atual):
 
     return novo
 
+def pedir_data(valor_atual):
+    """
+    Pede uma nova data no formato DD/MM/AAAA.
+
+    Se o utilizador carregar só em Enter, mantém a data atual.
+    Se a data for inválida, volta a pedir até ser válida.
+
+    Parâmetros:
+        valor_atual (str): data que o evento tem agora (DD/MM/AAAA).
+
+    Devolve:
+        str: a nova data em DD/MM/AAAA, ou a data atual.
+    """
+    while True:
+        nova = input(f"Data (DD/MM/AAAA) [{valor_atual}]: ").strip()
+
+        # Enter sem escrever nada = manter a data antiga
+        if nova == "":
+            return valor_atual
+
+        try:
+            # Verifica se o texto é uma data real no formato DD/MM/AAAA
+            data_validada = datetime.strptime(nova, "%d/%m/%Y")
+            # Volta a escrever com 2 dígitos (ex.: 1/2/2027 -> 01/02/2027)
+            return data_validada.strftime("%d/%m/%Y")
+        except ValueError:
+            print("Data inválida. Usa DD/MM/AAAA com uma data real.")
 
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python editar_eventos.py). Serve apenas para testes.
@@ -78,5 +105,5 @@ if __name__ == "__main__":
     print(procurar_evento_por_id(eventos_teste, 1))
     print(procurar_evento_por_id(eventos_teste, 99))
 
-    novo_nome = pedir_texto("Nome", "Festival de Verão")
-    print("Resultado:", novo_nome)
+    nova_data = pedir_data("15/07/2027")
+    print("Resultado:", nova_data)
