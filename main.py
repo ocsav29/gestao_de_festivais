@@ -1,3 +1,9 @@
+from criar_eventos import criar_evento
+from dados import carregar_eventos, guardar_eventos
+
+
+eventos = carregar_eventos()
+
 def menu():
     while True:
         print("\n=== GESTÃO DE FESTIVAIS ===")
@@ -10,8 +16,8 @@ def menu():
         opcao = input("Escolhe uma opção: ")
 
         if opcao == "1":
-            print("Vamos implementar a criação de eventos.")
-
+            criar_evento(eventos)
+            guardar_eventos(eventos)
         elif opcao == "2":
             print("Vamos implementar a consulta de eventos.")
 
