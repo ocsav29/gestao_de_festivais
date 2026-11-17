@@ -1,3 +1,4 @@
+from despesas import registar_despesa
 from eliminar_eventos import eliminar_evento
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
@@ -12,6 +13,7 @@ def menu():
         print("2 - Consultar eventos")
         print("3 - Editar evento")
         print("4 - Eliminar evento")
+        print("5 - Registar despesa")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -29,6 +31,11 @@ def menu():
             eliminar_evento(eventos)
             guardar_eventos(eventos)
 
+        elif opcao == "5":
+            registar_despesa(eventos)
+            guardar_eventos(eventos)
+       
+       
         elif opcao == "0":
             print("Programa terminado.")
             break
