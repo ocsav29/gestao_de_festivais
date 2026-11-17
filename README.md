@@ -36,6 +36,34 @@ No Windows também pode ser utilizado:
 py main.py
 ```
 
+## Registar participantes
+
+Ficheiro: `participantes.py` (autor: Miguel Palma)
+
+Permite inscrever participantes num evento e controlar o número de pessoas.
+
+Como funciona:
+
+1. O utilizador escolhe o evento pelo número da lista (0 cancela).
+2. É mostrada a ocupação atual, por exemplo `Lugares ocupados: 2/3`.
+3. Se o evento estiver lotado, a inscrição é recusada.
+4. Caso contrário, são pedidos o nome e o contacto (telefone ou email).
+   Nenhum dos campos pode ficar vazio.
+
+Dados:
+
+- Os participantes ficam dentro de cada evento, na lista `evento["participantes"]`.
+- Cada participante tem `id` (código único), `nome` e `contacto`.
+- São gravados no `eventos.json`, juntamente com o evento.
+
+No menu principal: opção `7 - Registar participante`.
+
+Para testar esta parte isoladamente, com eventos de exemplo:
+
+```bash
+python participantes.py
+```
+
 ## Equipa
 
 - Vasco Silva
