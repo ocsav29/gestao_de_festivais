@@ -1,3 +1,4 @@
+from uuid import uuid4
 from datetime import datetime
 
 def criar_evento(eventos):
@@ -62,7 +63,7 @@ def criar_evento(eventos):
             print("Escreve um número. Exemplo: 1500 ou 1500,50.")
 
     evento = {
-        "id": len(eventos) + 1,
+        "id": uuid4().hex,
         "nome": nome,
         "descricao": descricao,
         "local": local,
