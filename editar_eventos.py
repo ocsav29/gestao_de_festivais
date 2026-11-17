@@ -13,7 +13,7 @@ def procurar_evento_por_id(eventos, id_evento):
 
     Parâmetros:
         eventos (list): lista de dicionários com os eventos.
-        id_evento (int): id do evento a procurar.
+        id_evento (str): id do evento a procurar.
 
     Devolve:
         dict: o evento encontrado, ou None se não existir.
@@ -144,7 +144,7 @@ def pedir_orcamento(valor_atual):
 
 def editar_evento(eventos):
     """
-    Permite ao utilizador escolher um evento pelo id e alterar os seus dados.
+    Permite ao utilizador escolher um evento da lista e alterar os seus dados.
 
     Para cada campo, carregar só em Enter mantém o valor atual.
     O evento só é alterado no fim, depois de todos os valores serem válidos.
@@ -160,21 +160,24 @@ def editar_evento(eventos):
         print("Ainda não existem eventos para editar.")
         return
 
-    # Mostra os eventos existentes para o utilizador saber os ids
-    for evento in eventos:
-        print(f"{evento['id']} - {evento['nome']} ({evento['data']})")
+    # Mostra os eventos numerados (1, 2, 3...) para o utilizador escolher.
+    # O id é um código longo, por isso escolhe-se pelo número da lista.
+    for numero, evento in enumerate(eventos, start=1):
+        print(f"{numero} - {evento['nome']} ({evento['data']})")
 
     try:
-        id_evento = int(input("\nId do evento a editar: ").strip())
+        escolha = int(input("\nNúmero do evento a editar: ").strip())
     except ValueError:
-        print("Id inválido. Tem de ser um número.")
+        print("Número inválido. Tem de ser um número.")
         return
 
-    evento = procurar_evento_por_id(eventos, id_evento)
-
-    if evento is None:
-        print("Não existe nenhum evento com esse id.")
+    # O número tem de corresponder a um evento da lista
+    if escolha < 1 or escolha > len(eventos):
+        print("Não existe nenhum evento com esse número.")
         return
+
+    # A lista começa na posição 0, por isso subtrai-se 1
+    evento = eventos[escolha - 1]
 
     print("\nCarrega em Enter para manter o valor que está entre [ ].")
 
@@ -202,7 +205,7 @@ def editar_evento(eventos):
 if __name__ == "__main__":
     eventos_teste = [
         {
-            "id": 1,
+            "id": "teste1",
             "nome": "Festival de Verão",
             "descricao": "Música ao ar livre",
             "local": "Faro",
@@ -211,7 +214,7 @@ if __name__ == "__main__":
             "orcamento": 2000.0,
         },
         {
-            "id": 2,
+            "id": "teste2",
             "nome": "Noite de Jazz",
             "descricao": "Concerto de jazz",
             "local": "Lagos",
@@ -221,8 +224,8 @@ if __name__ == "__main__":
         },
     ]
 
-    print(procurar_evento_por_id(eventos_teste, 1))
-    print(procurar_evento_por_id(eventos_teste, 99))
+    print(procurar_evento_por_id(eventos_teste, "teste1"))
+    print(procurar_evento_por_id(eventos_teste, "nao-existe"))
 
     editar_evento(eventos_teste)
 
