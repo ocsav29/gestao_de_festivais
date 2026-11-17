@@ -104,6 +104,45 @@ def pedir_dados_participante():
 
     return participante
 
+def registar_participante(eventos):
+    """
+    Inscreve um participante num evento, respeitando a capacidade máxima.
+
+    O participante é guardado dentro do evento, na lista
+    evento["participantes"]. Se o evento estiver lotado, não inscreve.
+
+    Parâmetros:
+        eventos (list): lista de dicionários com os eventos.
+            A lista é alterada diretamente (não é feita uma cópia).
+    """
+    print("\n=== REGISTAR PARTICIPANTE ===")
+
+    # Sem eventos, não há onde inscrever participantes
+    if not eventos:
+        print("Ainda não existem eventos. Cria um primeiro.")
+        return
+
+    evento = escolher_evento(eventos)
+
+    # None = o utilizador cancelou ou escolheu um número inválido
+    if evento is None:
+        return
+
+    print(f"\nLugares ocupados: {contar_participantes(evento)}/{evento['capacidade']}")
+
+    # Controlo da capacidade: não deixa inscrever se não houver vagas
+    if lugares_disponiveis(evento) <= 0:
+        print("Este evento está lotado. Não é possível inscrever mais participantes.")
+        return
+
+    participante = pedir_dados_participante()
+
+    # Cria a lista de participantes se o evento ainda não tiver uma
+    evento.setdefault("participantes", []).append(participante)
+
+    print(f"\nParticipante '{participante['nome']}' inscrito no evento '{evento['nome']}'.")
+    print(f"Lugares ocupados: {contar_participantes(evento)}/{evento['capacidade']}")
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python participantes.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -128,17 +167,10 @@ if __name__ == "__main__":
         },
     ]
 
-        # Evento sem participantes
-    print("Inscritos:", contar_participantes(eventos_teste[0]))
-    print("Vagas:", lugares_disponiveis(eventos_teste[0]))
+            # Tenta inscrever 4 pessoas no evento 1, que só tem 3 lugares
+    for tentativa in range(4):
+        registar_participante(eventos_teste)
 
-    # Simula 2 participantes inscritos
-    eventos_teste[0]["participantes"] = [
-        {"id": "p1", "nome": "Ana", "contacto": "912345678"},
-        {"id": "p2", "nome": "Rui", "contacto": "rui@email.pt"},
-    ]
-    print("Inscritos:", contar_participantes(eventos_teste[0]))
-    print("Vagas:", lugares_disponiveis(eventos_teste[0]))
-
-    novo = pedir_dados_participante()
-    print("Participante criado:", novo)
+    print("\nParticipantes do evento 1:")
+    for participante in eventos_teste[0].get("participantes", []):
+        print(participante)
