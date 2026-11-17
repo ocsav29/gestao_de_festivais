@@ -142,6 +142,61 @@ def pedir_orcamento(valor_atual):
 
         print("Introduz um orçamento válido igual ou superior a zero.")
 
+def editar_evento(eventos):
+    """
+    Permite ao utilizador escolher um evento pelo id e alterar os seus dados.
+
+    Para cada campo, carregar só em Enter mantém o valor atual.
+    O evento só é alterado no fim, depois de todos os valores serem válidos.
+
+    Parâmetros:
+        eventos (list): lista de dicionários com os eventos.
+            A lista é alterada diretamente (não é feita uma cópia).
+    """
+    print("\n=== EDITAR EVENTO ===")
+
+    # Sem eventos, não há nada para editar
+    if not eventos:
+        print("Ainda não existem eventos para editar.")
+        return
+
+    # Mostra os eventos existentes para o utilizador saber os ids
+    for evento in eventos:
+        print(f"{evento['id']} - {evento['nome']} ({evento['data']})")
+
+    try:
+        id_evento = int(input("\nId do evento a editar: ").strip())
+    except ValueError:
+        print("Id inválido. Tem de ser um número.")
+        return
+
+    evento = procurar_evento_por_id(eventos, id_evento)
+
+    if evento is None:
+        print("Não existe nenhum evento com esse id.")
+        return
+
+    print("\nCarrega em Enter para manter o valor que está entre [ ].")
+
+    # Pede todos os valores primeiro
+    novo_nome = pedir_texto("Nome", evento["nome"])
+    nova_descricao = pedir_texto("Descrição", evento["descricao"])
+    novo_local = pedir_texto("Local", evento["local"])
+    nova_data = pedir_data(evento["data"])
+    nova_capacidade = pedir_capacidade(evento["capacidade"])
+    novo_orcamento = pedir_orcamento(evento["orcamento"])
+
+    # Só depois altera o evento (o id nunca muda)
+    evento["nome"] = novo_nome
+    evento["descricao"] = nova_descricao
+    evento["local"] = novo_local
+    evento["data"] = nova_data
+    evento["capacidade"] = nova_capacidade
+    evento["orcamento"] = novo_orcamento
+
+    print(f"\nEvento '{evento['nome']}' atualizado com sucesso!")
+
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python editar_eventos.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -169,5 +224,9 @@ if __name__ == "__main__":
     print(procurar_evento_por_id(eventos_teste, 1))
     print(procurar_evento_por_id(eventos_teste, 99))
 
-    novo_orcamento = pedir_orcamento(2000.0)
-    print("Resultado:", novo_orcamento)
+    editar_evento(eventos_teste)
+
+    # Mostra como ficaram os eventos depois da edição
+    print("\nEventos depois da edição:")
+    for evento in eventos_teste:
+        print(evento)
