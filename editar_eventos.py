@@ -109,6 +109,39 @@ def pedir_capacidade(valor_atual):
 
         print("A capacidade tem de ser maior que zero.")
 
+def pedir_orcamento(valor_atual):
+    """
+    Pede um novo orçamento (número igual ou superior a zero).
+
+    Aceita vírgula ou ponto nas casas decimais (1500,50 ou 1500.50).
+    Se o utilizador carregar só em Enter, mantém o orçamento atual.
+
+    Parâmetros:
+        valor_atual (float): orçamento que o evento tem agora.
+
+    Devolve:
+        float: o novo orçamento, ou o orçamento atual.
+    """
+    while True:
+        novo = input(f"Orçamento (€) [{valor_atual}]: ").strip()
+
+        # Enter sem escrever nada = manter o orçamento antigo
+        if novo == "":
+            return valor_atual
+
+        try:
+            # Troca a vírgula por ponto para o Python perceber o número
+            orcamento = float(novo.replace(",", "."))
+        except ValueError:
+            print("Escreve um número. Exemplo: 1500 ou 1500,50.")
+            continue
+
+        # Igual à validação da criação: >= 0 e não infinito
+        if 0 <= orcamento < float("inf"):
+            return orcamento
+
+        print("Introduz um orçamento válido igual ou superior a zero.")
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python editar_eventos.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -136,5 +169,5 @@ if __name__ == "__main__":
     print(procurar_evento_por_id(eventos_teste, 1))
     print(procurar_evento_por_id(eventos_teste, 99))
 
-    nova_capacidade = pedir_capacidade(500)
-    print("Resultado:", nova_capacidade)
+    novo_orcamento = pedir_orcamento(2000.0)
+    print("Resultado:", novo_orcamento)
