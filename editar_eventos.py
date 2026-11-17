@@ -78,6 +78,37 @@ def pedir_data(valor_atual):
         except ValueError:
             print("Data inválida. Usa DD/MM/AAAA com uma data real.")
 
+def pedir_capacidade(valor_atual):
+    """
+    Pede uma nova capacidade máxima (número inteiro maior que zero).
+
+    Se o utilizador carregar só em Enter, mantém a capacidade atual.
+    Se o valor for inválido, volta a pedir.
+
+    Parâmetros:
+        valor_atual (int): capacidade que o evento tem agora.
+
+    Devolve:
+        int: a nova capacidade, ou a capacidade atual.
+    """
+    while True:
+        nova = input(f"Capacidade máxima [{valor_atual}]: ").strip()
+
+        # Enter sem escrever nada = manter a capacidade antiga
+        if nova == "":
+            return valor_atual
+
+        try:
+            capacidade = int(nova)
+        except ValueError:
+            print("Escreve um número inteiro. Exemplo: 500.")
+            continue  # volta ao início do while e pergunta outra vez
+
+        if capacidade > 0:
+            return capacidade
+
+        print("A capacidade tem de ser maior que zero.")
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python editar_eventos.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -105,5 +136,5 @@ if __name__ == "__main__":
     print(procurar_evento_por_id(eventos_teste, 1))
     print(procurar_evento_por_id(eventos_teste, 99))
 
-    nova_data = pedir_data("15/07/2027")
-    print("Resultado:", nova_data)
+    nova_capacidade = pedir_capacidade(500)
+    print("Resultado:", nova_capacidade)
