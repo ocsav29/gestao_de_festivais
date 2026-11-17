@@ -9,7 +9,16 @@ Desenvolver uma aplicação de consola em Python para gerir festivais.
 
 ## Estado atual
 
-Menu inicial implementado.
+Funcionalidades implementadas:
+- Criar eventos com validação dos dados.
+- Guardar e carregar eventos em JSON.
+- Eliminar eventos com confirmação.
+- Registar despesas com categoria descrição e valor.
+- Registar fornecedores e guardar os dados em JSON.
+- Consultar o orçamento previsto e o total gasto por evento.
+
+Os ficheiros eventos.json e fornecedores.json são criados
+automaticamente durante a utilização e não são enviados para o GitHub.
 
 ## Funcionalidades previstas
 
@@ -56,7 +65,7 @@ Dados:
 - Cada participante tem `id` (código único), `nome` e `contacto`.
 - São gravados no `eventos.json`, juntamente com o evento.
 
-No menu principal: opção `7 - Registar participante`.
+No menu principal: opção `8 - Registar participante`.
 
 Para testar esta parte isoladamente, com eventos de exemplo:
 

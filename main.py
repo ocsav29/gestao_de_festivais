@@ -1,3 +1,4 @@
+from orcamento import consultar_orcamento
 from fornecedores import registar_fornecedor
 from dados import carregar_fornecedores, guardar_fornecedores
 from despesas import registar_despesa
@@ -18,7 +19,8 @@ def menu():
         print("4 - Eliminar evento")
         print("5 - Registar despesa")
         print("6 - Registar fornecedor")
-        print("7 - Registar participante")
+        print("7 - Consultar orçamento")
+        print("8 - Registar participante")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -45,9 +47,12 @@ def menu():
             guardar_fornecedores(fornecedores)
 
         elif opcao == "7":
+            consultar_orcamento(eventos)
+
+        elif opcao == "8":
             registar_participante(eventos)
             guardar_eventos(eventos)
-       
+
         elif opcao == "0":
             print("Programa terminado.")
             break
