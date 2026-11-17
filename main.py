@@ -1,6 +1,6 @@
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
-
+from registar_bilhetes import registar_bilhetes
 
 eventos = carregar_eventos()
 
@@ -11,6 +11,7 @@ def menu():
         print("2 - Consultar eventos")
         print("3 - Editar evento")
         print("4 - Eliminar evento")
+        print("5 - Registar bilhetes vendidos")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -26,7 +27,8 @@ def menu():
 
         elif opcao == "4":
             print("Vamos implementar a eliminação de eventos.")
-
+        elif opcao == "5":
+            registar_bilhetes(eventos)
         elif opcao == "0":
             print("Programa terminado.")
             break
