@@ -1,3 +1,4 @@
+from eliminar_eventos import eliminar_evento
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
 
@@ -25,7 +26,8 @@ def menu():
             print("Vamos implementar a edição de eventos.")
 
         elif opcao == "4":
-            print("Vamos implementar a eliminação de eventos.")
+            eliminar_evento(eventos)
+            guardar_eventos(eventos)
 
         elif opcao == "0":
             print("Programa terminado.")
