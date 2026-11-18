@@ -64,6 +64,30 @@ def calcular_receita_total(bilhetes):
 
     return receita
 
+def mostrar_receitas(eventos, bilhetes):
+    """
+    Mostra os bilhetes vendidos e a receita de cada evento, e a receita total.
+
+    Parâmetros:
+        eventos (list): lista de dicionários com os eventos.
+        bilhetes (list): lista de vendas de bilhetes.
+    """
+    print("\n=== RECEITA DOS BILHETES ===")
+
+    if not eventos:
+        print("Ainda não existem eventos registados.")
+        return
+
+    for evento in eventos:
+        quantidade = contar_bilhetes_evento(bilhetes, evento["id"])
+        receita = calcular_receita_evento(bilhetes, evento["id"])
+
+        # :.2f mostra sempre 2 casas decimais (ex.: 37.50)
+        print(f"{evento['nome']} ({evento['data']}): "
+              f"{quantidade} bilhetes | {receita:.2f} €")
+
+    print(f"\nReceita total: {calcular_receita_total(bilhetes):.2f} €")
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python receita.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -73,10 +97,11 @@ if __name__ == "__main__":
         {"id_evento": "teste2", "quantidade": 3, "preco_unitario": 12.5, "total": 37.5},
     ]
 
-    print("Receita teste1:", calcular_receita_evento(bilhetes_teste, "teste1"))
-    print("Receita teste2:", calcular_receita_evento(bilhetes_teste, "teste2"))
-    print("Receita evento sem vendas:", calcular_receita_evento(bilhetes_teste, "outro"))
+    eventos_teste = [
+        {"id": "teste1", "nome": "Festival de Verão", "data": "15/07/2027"},
+        {"id": "teste2", "nome": "Noite de Jazz", "data": "10/08/2027"},
+        {"id": "teste3", "nome": "Feira Medieval", "data": "05/09/2027"},
+    ]
 
-    print("Bilhetes teste1:", contar_bilhetes_evento(bilhetes_teste, "teste1"))
-    print("Receita total:", calcular_receita_total(bilhetes_teste))
-    print("Receita total sem vendas:", calcular_receita_total([]))
+    mostrar_receitas(eventos_teste, bilhetes_teste)
+    mostrar_receitas([], bilhetes_teste)
