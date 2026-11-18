@@ -19,3 +19,20 @@ def guardar_eventos(eventos):
     """Grava a lista de eventos num ficheiro JSON."""
     with FICHEIRO_EVENTOS.open("w", encoding="utf-8") as ficheiro:
         json.dump(eventos, ficheiro, ensure_ascii=False, indent=4)
+
+FICHEIRO_FORNECEDORES = Path(__file__).with_name("fornecedores.json")
+
+
+def carregar_fornecedores():
+    """Lê os fornecedores guardados ou devolve uma lista vazia."""
+    if not FICHEIRO_FORNECEDORES.exists():
+        return []
+
+    with FICHEIRO_FORNECEDORES.open("r", encoding="utf-8") as ficheiro:
+        return json.load(ficheiro)
+
+
+def guardar_fornecedores(fornecedores):
+    """Grava a lista de fornecedores num ficheiro JSON."""
+    with FICHEIRO_FORNECEDORES.open("w", encoding="utf-8") as ficheiro:
+        json.dump(fornecedores, ficheiro, ensure_ascii=False, indent=4)
