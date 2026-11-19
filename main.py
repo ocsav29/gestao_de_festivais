@@ -6,6 +6,7 @@ from despesas import registar_despesa
 from eliminar_eventos import eliminar_evento
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
+from editar_eventos import editar_evento
 from participantes import registar_participante
 from registar_bilhetes import registar_bilhetes
 from receita import mostrar_receitas
@@ -40,7 +41,8 @@ def menu():
             print("Vamos implementar a consulta de eventos.")
 
         elif opcao == "3":
-            print("Vamos implementar a edição de eventos.")
+            editar_evento(eventos)
+            guardar_eventos(eventos)
 
         elif opcao == "4":
             eliminar_evento(eventos)

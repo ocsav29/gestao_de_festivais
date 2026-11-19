@@ -89,6 +89,37 @@ Para testar esta parte isoladamente, com eventos de exemplo:
 python participantes.py
 ```
 
+## Editar eventos
+
+Ficheiro: `editar_eventos.py` (autor: Miguel Palma)
+
+Permite alterar os dados de um evento que já existe.
+
+Como funciona:
+
+1. São mostrados os eventos existentes, numerados (1, 2, 3...).
+2. O utilizador escolhe o número do evento a editar.
+3. Para cada campo é mostrado o valor atual entre `[ ]`.
+   Carregar só em Enter mantém esse valor.
+4. O evento só é alterado no fim, depois de todos os valores serem válidos.
+   O id nunca é alterado.
+
+Validações:
+
+- Nome, descrição e local não podem ficar vazios.
+- Data no formato DD/MM/AAAA e tem de ser uma data real.
+- Capacidade tem de ser um número inteiro maior que zero.
+- Orçamento tem de ser um número igual ou superior a zero
+  (aceita vírgula ou ponto, ex.: 1500,50).
+
+Para testar esta parte isoladamente, com eventos de exemplo:
+
+```bash
+python editar_eventos.py
+```
+
+No menu principal: opção `3 - Editar evento`.
+
 ## Equipa
 
 - Vasco Silva
