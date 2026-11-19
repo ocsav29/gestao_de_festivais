@@ -81,7 +81,75 @@ def associar_fornecedor(eventos, fornecedores):
 
     print(f"\nFornecedor '{fornecedor['nome']}' ({fornecedor['tipo_servico']}) "
           f"associado ao evento '{evento['nome']}'.")
-    
+
+def procurar_fornecedor_por_id(fornecedores, id_fornecedor):
+    """
+    Procura um fornecedor na lista pelo seu id.
+
+    Parâmetros:
+        fornecedores (list): lista de dicionários com os fornecedores.
+        id_fornecedor (str): id do fornecedor a procurar.
+
+    Devolve:
+        dict: o fornecedor encontrado, ou None se não existir.
+    """
+    for fornecedor in fornecedores:
+        if fornecedor["id"] == id_fornecedor:
+            return fornecedor
+
+    return None
+
+def procurar_fornecedor_por_id(fornecedores, id_fornecedor):
+    """
+    Procura um fornecedor na lista pelo seu id.
+
+    Parâmetros:
+        fornecedores (list): lista de dicionários com os fornecedores.
+        id_fornecedor (str): id do fornecedor a procurar.
+
+    Devolve:
+        dict: o fornecedor encontrado, ou None se não existir.
+    """
+    for fornecedor in fornecedores:
+        if fornecedor["id"] == id_fornecedor:
+            return fornecedor
+
+    return None
+
+
+def mostrar_fornecedores_eventos(eventos, fornecedores):
+    """
+    Mostra, para cada evento, os fornecedores associados e o serviço de cada um.
+
+    Parâmetros:
+        eventos (list): lista de dicionários com os eventos.
+        fornecedores (list): lista de dicionários com os fornecedores.
+    """
+    print("\n=== FORNECEDORES POR EVENTO ===")
+
+    if not eventos:
+        print("Ainda não existem eventos registados.")
+        return
+
+    for evento in eventos:
+        print(f"\n{evento['nome']} ({evento['data']})")
+
+        ids_associados = evento.get("fornecedores", [])
+
+        if not ids_associados:
+            print("  Sem fornecedores associados.")
+            continue  # passa ao evento seguinte
+
+        for id_fornecedor in ids_associados:
+            fornecedor = procurar_fornecedor_por_id(fornecedores, id_fornecedor)
+
+            # O fornecedor pode já não existir na lista
+            if fornecedor is None:
+                print("  - Fornecedor não encontrado (pode ter sido removido).")
+            else:
+                print(f"  - {fornecedor['tipo_servico']}: {fornecedor['nome']} "
+                      f"(contacto: {fornecedor['contacto']})")
+                
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python associar_fornecedores.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -102,3 +170,4 @@ if __name__ == "__main__":
         associar_fornecedor(eventos_teste, fornecedores_teste)
 
     print("\nFornecedores do evento 1:", eventos_teste[0].get("fornecedores", []))
+    mostrar_fornecedores_eventos(eventos_teste, fornecedores_teste)
