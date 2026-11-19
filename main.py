@@ -1,3 +1,4 @@
+
 from orcamento import consultar_orcamento
 from fornecedores import registar_fornecedor
 from dados import carregar_fornecedores, guardar_fornecedores
@@ -5,10 +6,12 @@ from despesas import registar_despesa
 from eliminar_eventos import eliminar_evento
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
-
+from registar_bilhetes import registar_bilhetes
 
 eventos = carregar_eventos()
 fornecedores = carregar_fornecedores()
+
+
 def menu():
     while True:
         print("\n=== GESTÃO DE FESTIVAIS ===")
@@ -19,6 +22,7 @@ def menu():
         print("5 - Registar despesa")
         print("6 - Registar fornecedor")
         print("7 - Consultar orçamento")
+        print("9 - Registar bilhetes vendidos")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -26,6 +30,7 @@ def menu():
         if opcao == "1":
             criar_evento(eventos)
             guardar_eventos(eventos)
+
         elif opcao == "2":
             print("Vamos implementar a consulta de eventos.")
 
@@ -39,15 +44,17 @@ def menu():
         elif opcao == "5":
             registar_despesa(eventos)
             guardar_eventos(eventos)
-        
+
         elif opcao == "6":
             registar_fornecedor(fornecedores)
             guardar_fornecedores(fornecedores)
-       
-        
+
         elif opcao == "7":
             consultar_orcamento(eventos)
-        
+
+        elif opcao == "9":
+            registar_bilhetes(eventos)
+
         elif opcao == "0":
             print("Programa terminado.")
             break
