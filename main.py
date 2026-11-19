@@ -7,6 +7,8 @@ from eliminar_eventos import eliminar_evento
 from criar_eventos import criar_evento
 from dados import carregar_eventos, guardar_eventos
 from registar_bilhetes import registar_bilhetes
+from receita import mostrar_receitas
+from dados_bilhetes import carregar_bilhetes
 
 eventos = carregar_eventos()
 fornecedores = carregar_fornecedores()
@@ -23,6 +25,7 @@ def menu():
         print("6 - Registar fornecedor")
         print("7 - Consultar orçamento")
         print("9 - Registar bilhetes vendidos")
+        print("10 - Consultar receita dos bilhetes")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -54,6 +57,9 @@ def menu():
 
         elif opcao == "9":
             registar_bilhetes(eventos)
+
+        elif opcao == "10":
+            mostrar_receitas(eventos, carregar_bilhetes())
 
         elif opcao == "0":
             print("Programa terminado.")
