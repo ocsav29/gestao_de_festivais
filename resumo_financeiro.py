@@ -7,7 +7,7 @@ e o lucro estimado (receita - despesas).
 As despesas estão em evento["despesas"] (cada uma com a chave "valor").
 As receitas vêm das vendas de bilhetes (chaves id_evento e total).
 """
-
+from receita import calcular_receita_evento
 
 def calcular_total_despesas(evento):
     """
@@ -27,6 +27,21 @@ def calcular_total_despesas(evento):
 
     return total
 
+def calcular_lucro(evento, bilhetes):
+    """
+    Calcula o lucro estimado de um evento: receita dos bilhetes - despesas.
+
+    Parâmetros:
+        evento (dict): o evento a analisar.
+        bilhetes (list): lista de vendas de bilhetes.
+
+    Devolve:
+        float: lucro estimado (negativo se as despesas forem maiores).
+    """
+    receita = calcular_receita_evento(bilhetes, evento["id"])
+    despesas = calcular_total_despesas(evento)
+
+    return receita - despesas
 
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python resumo_financeiro.py). Serve apenas para testes.
@@ -52,3 +67,12 @@ if __name__ == "__main__":
 
     print("Despesas teste1:", calcular_total_despesas(eventos_teste[0]))
     print("Despesas teste2:", calcular_total_despesas(eventos_teste[1]))
+
+    bilhetes_teste = [
+        {"id_evento": "teste1", "quantidade": 40, "preco_unitario": 15.0, "total": 600.0},
+        {"id_evento": "teste2", "quantidade": 2, "preco_unitario": 10.0, "total": 20.0},
+    ]
+
+    print("Lucro teste1:", calcular_lucro(eventos_teste[0], bilhetes_teste))
+    print("Lucro teste2:", calcular_lucro(eventos_teste[1], bilhetes_teste))
+    print("Lucro sem vendas:", calcular_lucro(eventos_teste[0], []))
