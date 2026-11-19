@@ -11,6 +11,7 @@ from participantes import registar_participante
 from registar_bilhetes import registar_bilhetes
 from receita import mostrar_receitas
 from dados_bilhetes import carregar_bilhetes
+from resumo_financeiro import mostrar_resumo_financeiro
 
 eventos = carregar_eventos()
 fornecedores = carregar_fornecedores()
@@ -29,6 +30,7 @@ def menu():
         print("8 - Registar participante")
         print("9 - Registar bilhetes vendidos")
         print("10 - Consultar receita dos bilhetes")
+        print("11 - Resumo financeiro (despesas, receitas e lucro)")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -68,6 +70,9 @@ def menu():
 
         elif opcao == "10":
             mostrar_receitas(eventos, carregar_bilhetes())
+        
+        elif opcao == "11":
+            mostrar_resumo_financeiro(eventos, carregar_bilhetes())
 
         elif opcao == "0":
             print("Programa terminado.")
