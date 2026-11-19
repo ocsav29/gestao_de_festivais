@@ -44,6 +44,22 @@ No Windows também pode ser utilizado:
 ```bash
 py main.py
 ```
+## Receita dos bilhetes
+
+Ficheiro: `receita.py` (autor: Miguel Palma)
+
+Calcula automaticamente a receita dos bilhetes vendidos.
+
+- Para cada evento mostra o número de bilhetes vendidos e a receita (€).
+- No fim mostra a receita total de todos os eventos.
+- Usa as vendas registadas no registo de bilhetes
+  (campos `id_evento`, `quantidade`, `preco_unitario` e `total`).
+
+Para testar esta parte isoladamente, com dados de exemplo:
+
+```bash
+python receita.py
+```
 
 ## Registar participantes
 
