@@ -43,6 +43,38 @@ def calcular_lucro(evento, bilhetes):
 
     return receita - despesas
 
+def mostrar_resumo_financeiro(eventos, bilhetes):
+    """
+    Mostra, para cada evento, o total de despesas, a receita e o lucro estimado.
+
+    Parâmetros:
+        eventos (list): lista de dicionários com os eventos.
+        bilhetes (list): lista de vendas de bilhetes.
+    """
+    print("\n=== RESUMO FINANCEIRO ===")
+
+    if not eventos:
+        print("Ainda não existem eventos registados.")
+        return
+
+    for evento in eventos:
+        despesas = calcular_total_despesas(evento)
+        receita = calcular_receita_evento(bilhetes, evento["id"])
+        lucro = calcular_lucro(evento, bilhetes)
+
+        # Indica a situação do evento conforme o lucro
+        if lucro > 0:
+            situacao = "Lucro"
+        elif lucro < 0:
+            situacao = "Prejuízo"
+        else:
+            situacao = "Sem lucro nem prejuízo"
+
+        print(f"\n{evento['nome']} ({evento['data']})")
+        print(f"  Despesas: {despesas:.2f} €")
+        print(f"  Receitas: {receita:.2f} €")
+        print(f"  Lucro estimado: {lucro:.2f} € ({situacao})")
+
 # Este bloco só corre quando se executa este ficheiro diretamente
 # (python resumo_financeiro.py). Serve apenas para testes.
 if __name__ == "__main__":
@@ -65,14 +97,11 @@ if __name__ == "__main__":
         },
     ]
 
-    print("Despesas teste1:", calcular_total_despesas(eventos_teste[0]))
-    print("Despesas teste2:", calcular_total_despesas(eventos_teste[1]))
-
     bilhetes_teste = [
         {"id_evento": "teste1", "quantidade": 40, "preco_unitario": 15.0, "total": 600.0},
         {"id_evento": "teste2", "quantidade": 2, "preco_unitario": 10.0, "total": 20.0},
     ]
 
-    print("Lucro teste1:", calcular_lucro(eventos_teste[0], bilhetes_teste))
-    print("Lucro teste2:", calcular_lucro(eventos_teste[1], bilhetes_teste))
-    print("Lucro sem vendas:", calcular_lucro(eventos_teste[0], []))
+    mostrar_resumo_financeiro(eventos_teste, bilhetes_teste)
+    mostrar_resumo_financeiro(eventos_teste, [])
+    mostrar_resumo_financeiro([], bilhetes_teste)
