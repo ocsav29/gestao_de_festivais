@@ -141,6 +141,25 @@ Para testar esta parte isoladamente, com dados de exemplo:
 python resumo_financeiro.py
 ```
 
+## Associar fornecedores a eventos
+
+Ficheiro: `associar_fornecedores.py` (autor: Miguel Palma)
+
+Permite associar fornecedores a eventos e consultar quem é responsável
+por cada serviço.
+
+- **Associar (opção 12):** escolhe-se o evento e o fornecedor pelo número da lista.
+  O id do fornecedor fica guardado no evento, em `evento["fornecedores"]`.
+  Não é possível associar o mesmo fornecedor duas vezes ao mesmo evento.
+- **Consultar (opção 13):** para cada evento mostra os fornecedores associados,
+  com o tipo de serviço, o nome e o contacto.
+
+Para testar esta parte isoladamente, com dados de exemplo:
+
+```bash
+python associar_fornecedores.py
+```
+
 ## Equipa
 
 - Vasco Silva
