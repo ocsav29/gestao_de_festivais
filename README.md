@@ -120,6 +120,27 @@ python editar_eventos.py
 
 No menu principal: opção `3 - Editar evento`.
 
+## Resumo financeiro
+
+Ficheiro: `resumo_financeiro.py` (autor: Miguel Palma)
+
+Mostra a situação financeira de cada evento:
+
+- **Despesas:** soma do valor de todas as despesas do evento.
+- **Receitas:** soma das vendas de bilhetes do evento.
+- **Lucro estimado:** receitas - despesas, com a indicação
+  "Lucro", "Prejuízo" ou "Sem lucro nem prejuízo".
+
+Reaproveita a função `calcular_receita_evento` do `receita.py`.
+
+No menu principal: opção `11 - Resumo financeiro (despesas, receitas e lucro)`.
+
+Para testar esta parte isoladamente, com dados de exemplo:
+
+```bash
+python resumo_financeiro.py
+```
+
 ## Equipa
 
 - Vasco Silva
