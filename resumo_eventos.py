@@ -22,3 +22,10 @@ def mostrar_resumo_evento(eventos):
         return
 
     print(f"\nEvento selecionado: {evento['nome']}")
+    print("\n=== INFORMAÇÕES DO EVENTO ===")
+    print(f"Nome: {evento['nome']}")
+    print(f"Descrição: {evento['descricao']}")
+    print(f"Local: {evento['local']}")
+    print(f"Data: {evento['data']}")
+    print(f"Capacidade: {evento['capacidade']} pessoas")
+    print(f"Orçamento: {evento['orcamento']:.2f} €")
