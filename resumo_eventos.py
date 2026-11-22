@@ -1,6 +1,7 @@
 
 from participantes import escolher_evento
-
+from receita import contar_bilhetes_evento, calcular_receita_evento
+from dados_bilhetes import carregar_bilhetes
 
 def mostrar_resumo_evento(eventos):
     """
@@ -29,3 +30,12 @@ def mostrar_resumo_evento(eventos):
     print(f"Data: {evento['data']}")
     print(f"Capacidade: {evento['capacidade']} pessoas")
     print(f"Orçamento: {evento['orcamento']:.2f} €")
+        
+    bilhetes = carregar_bilhetes()
+
+    quantidade_vendida = contar_bilhetes_evento(bilhetes, evento["id"])
+    receita = calcular_receita_evento(bilhetes, evento["id"])
+
+    print("\n=== BILHETES E RECEITAS ===")
+    print(f"Bilhetes vendidos: {quantidade_vendida}")
+    print(f"Receita dos bilhetes: {receita:.2f} €")
