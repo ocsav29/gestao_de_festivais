@@ -13,6 +13,7 @@ from receita import mostrar_receitas
 from dados_bilhetes import carregar_bilhetes
 from resumo_financeiro import mostrar_resumo_financeiro
 from associar_fornecedores import associar_fornecedor, mostrar_fornecedores_eventos
+from resumo_eventos import mostrar_resumo_evento
 
 eventos = carregar_eventos()
 fornecedores = carregar_fornecedores()
@@ -34,6 +35,7 @@ def menu():
         print("11 - Resumo financeiro (despesas, receitas e lucro)")
         print("12 - Associar fornecedor a evento")
         print("13 - Consultar fornecedores por evento")
+        print("14 - Consultar resumo geral de um evento")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -83,7 +85,10 @@ def menu():
 
         elif opcao == "13":
             mostrar_fornecedores_eventos(eventos, fornecedores)
-
+        
+        elif opcao == "14":
+            mostrar_resumo_evento(eventos)
+        
         elif opcao == "0":
             print("Programa terminado.")
             break
